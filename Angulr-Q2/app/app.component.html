@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <h1>Employee Details Enrollment</h1>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" required #name="ngModel" 
+      [class.is-invalid]="name.invalid && name.touched" class="form-control" name="name" [(ngModel)]="userModel.name">
+      <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small>
+    </div><br>
+
+    <div class="form-group">
+      <label>Address</label>
+      <input type="text" required #address="ngModel" 
+      [class.is-invalid]="address.invalid && address.touched"class="form-control" name="Address" [(ngModel)]="userModel.address">
+      <small class="text-danger" [class.d-none]="address.valid || address.untouched">Address is required</small>
+    </div><br>
+
+    <div class="form-group">
+      <label>Phone</label>
+      <input type="tel" #phone="ngModel" pattern="\d{10}$" required
+      [class.is-invalid]="phone.invalid && phone.touched" class="form-control" name="phone" [(ngModel)]="userModel.phone">
+<div *ngIf ="phone.errors && (phone.valid || phone.touched)">
+  <small class="text-danger" *ngIf="phone.errors.required">Phone number is required</small>
+  <small class="text-danger" *ngIf="phone.errors.pattern">Phone number must be 10 digits</small>
+</div>
+    </div><br>
+
+    <div class="form-group">
+      <label>Dob</label>
+      <input type="date" class="form-control" name="dob" [(ngModel)]="userModel.dob">
+    </div><br>
+
+    <label><b>E-Mail</b></label>    
+    <input required type="email" pattern = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" name="email" #email="ngModel" class="Pass" placeholder="Email" [(ngModel)]="userModel.email">    
+        <b class="alert alert-danger" *ngIf="email.touched && !email.valid">Enter Email</b><br>
+        <b *ngIf="email.errors?.pattern">Invalid Email</b>
+            <br>
+
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </form>
+</div>
